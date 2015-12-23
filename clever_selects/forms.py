@@ -87,10 +87,13 @@ class ChainedChoicesMixin(object):
                         'field_value': field_value
                     }
                     cache_key = "clever-selects::{url}::{field_name}::{parent_value}::{field_value}".format(url=url, **params)
+                    print(cache_key)
 
                     if cache.get(cache_key):
+                        print('Found')
                         field.choices = cache.get(cache_key)
                     else:
+                        print('Not Found')
                         c = TestClient(HTTP_HOST="clever-selects.client")
 
                         try:
@@ -112,7 +115,7 @@ class ChainedChoicesMixin(object):
                                     'params': params
                                 })
 
-                        cache.set(cache_key, field.choices, 60)
+                        cache.set(cache_key, field.choices, 60 * 60)
 
                 field.initial = field_value
 
