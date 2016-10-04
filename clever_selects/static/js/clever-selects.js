@@ -13,7 +13,7 @@
                 },
                 function(j) {
                     var options = '';
-                    console.log(child);
+
                     if (!child[0].hasAttribute('multiple'))
                         options += '<option value="">' + empty_label + '</option>';
                     for (var i = 0; i < j.length; i++) {
@@ -21,6 +21,7 @@
                     }
                     valuefield.html(options);
                     valuefield.trigger('change');
+                    valuefield.trigger('load');
                     valuefield.trigger("liszt:updated"); // support for chosen versions < 1.0.0
                     valuefield.trigger("chosen:updated"); // support for chosen versions >= 1.0.0
                 },
